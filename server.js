@@ -45,9 +45,6 @@ const allowedOrigins = [
   "https://portfolio-galaxy.netlify.app",
 ];
 
-app.use(express.json());
-app.options("*", cors());
-
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -59,11 +56,13 @@ app.use(
     },
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: false,
   }),
 );
 
 /* ROUTES */
-app.use("/api/contact", require("./routes/contactRoutes"));
+app.post("/api/contact", require("./routes/contactRoutes"));
+app.get("/api/contact", require("./routes/contactRoutes"));
 
 /* TEST */
 app.get("/", (req, res) => {
