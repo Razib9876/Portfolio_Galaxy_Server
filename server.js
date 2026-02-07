@@ -18,10 +18,11 @@ app.use(express.json());
 
 // Routes
 app.use("/api/contact", require("./routes/contactRoutes"));
+app.use("reply", require("./routes/contactRoutes"));
 
 // Test route
 app.get("/", (req, res) => {
-  res.send("Portfolio server is running");
+  res.send("Portfolio Galaxy server is running");
 });
 
 const PORT = process.env.PORT || 5000;
