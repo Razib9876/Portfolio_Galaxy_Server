@@ -38,8 +38,10 @@ connectDB();
 
 const app = express();
 
-// Middleware
-const allowedOrigins = ["https://portfolio-galaxy.netlify.app/"];
+const allowedOrigins = [
+  "http://localhost:5173", // local frontend
+  "https://portfolio-galaxy.netlify.app", // deployed frontend
+];
 
 app.use(
   cors({
