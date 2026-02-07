@@ -53,19 +53,36 @@ const Contact = require("../models/contact");
 // POST /api/contact
 router.post("/", async (req, res) => {
   try {
-    const message = req.body;
-    console.log(name);
-    const newContact = await Contact.create(message);
+    console.log("Request body:", req.body);
+
+    const { name, email, message } = req.body;
+
+    // Validation (same quality as GET API)
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
+
+    const newContact = await Contact.create({
+      name,
+      email,
+      message,
+    });
+
     console.log("Saved contact:", newContact);
 
     res.status(201).json({
       success: true,
-      message: "Message sent",
       data: newContact,
     });
   } catch (error) {
     console.error("Contact route error:", error);
-    res.status(500).json({ success: false, message: "Server error" });
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 });
 
