@@ -17,8 +17,8 @@ app.use(
 app.use(express.json());
 
 // Routes
-app.use("api/contact", require("./routes/contactRoutes"));
-app.use("reply", require("./routes/contactRoutes"));
+app.use("/create", require("./routes/contactRoutes"));
+app.use("/message", require("./routes/contactRoutes"));
 
 // Test route
 app.get("/", (req, res) => {
