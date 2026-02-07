@@ -53,18 +53,9 @@ const Contact = require("../models/contact");
 // POST /api/contact
 router.post("/", async (req, res) => {
   try {
-    console.log("Request body:", req.body); // <-- check this in Render logs
-    const { name, email, message } = req.body;
-
-    if (!name || !email || !message) {
-      console.log("Validation failed:", req.body);
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required",
-      });
-    }
-
-    const newContact = await Contact.create({ name, email, message });
+    const message = req.body;
+    console.log(name);
+    const newContact = await Contact.create(message);
     console.log("Saved contact:", newContact);
 
     res.status(201).json({
