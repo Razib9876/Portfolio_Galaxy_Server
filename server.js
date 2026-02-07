@@ -39,10 +39,7 @@ connectDB();
 const app = express();
 
 // Middleware
-const allowedOrigins = [
-  "http://localhost:5173", // local frontend
-  "https://your-frontend.netlify.app", // deployed frontend
-];
+const allowedOrigins = ["https://portfolio-galaxy.netlify.app/"];
 
 app.use(
   cors({
@@ -59,7 +56,7 @@ app.use("/api/contact", require("./routes/contactRoutes"));
 
 // Test route
 app.get("/", (req, res) => {
-  res.send("Portfolio Galaxy server is running 🚀");
+  res.send("Portfolio Galaxy server is running ");
 });
 
 // Handle 404
