@@ -61,8 +61,8 @@ app.use(
 );
 
 /* ROUTES */
-app.post("/api/contact", require("./routes/contactRoutes"));
-app.get("/api/contact", require("./routes/contactRoutes"));
+app.use("/create", require("./routes/contactRoutes"));
+app.use("/message", require("./routes/contactRoutes"));
 
 /* TEST */
 app.get("/", (req, res) => {
