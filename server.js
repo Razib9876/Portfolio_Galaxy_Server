@@ -27,7 +27,6 @@
 
 // const PORT = process.env.PORT || 5000;
 // app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -38,30 +37,36 @@ connectDB();
 
 const app = express();
 
+/* 🔴 BODY PARSER — MUST COME BEFORE ROUTES */
+app.use(express.json());
+
+/* CORS */
 const allowedOrigins = [
-  "http://localhost:5173", // local frontend
-  "https://portfolio-galaxy.netlify.app", // deployed frontend
+  "http://localhost:5173",
+  "https://portfolio-galaxy.netlify.app",
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) callback(null, true);
-      else callback(new Error("Not allowed by CORS"));
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
     },
   }),
 );
-app.use(express.json());
 
-// Routes
+/* ROUTES */
 app.use("/api/contact", require("./routes/contactRoutes"));
 
-// Test route
+/* TEST */
 app.get("/", (req, res) => {
-  res.send("Portfolio Galaxy server is running ");
+  res.send("Portfolio Galaxy server is running 🚀");
 });
 
-// Handle 404
+/* 404 */
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Route not found" });
 });
