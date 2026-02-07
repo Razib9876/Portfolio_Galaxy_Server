@@ -40,11 +40,13 @@ const app = express();
 /* 🔴 BODY PARSER — MUST COME BEFORE ROUTES */
 app.use(express.json());
 
-/* CORS */
 const allowedOrigins = [
   "http://localhost:5173",
   "https://portfolio-galaxy.netlify.app",
 ];
+
+app.use(express.json());
+app.options("*", cors());
 
 app.use(
   cors({
@@ -55,6 +57,8 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 
